@@ -1,0 +1,28 @@
+.team {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .75em;
+    padding: .5em;
+    height: 1.6em;
+    border-radius: 4px;
+  }
+
+  .team:hover {
+      color: #607D8B;
+      background-color: #DDD;
+  }
+
+  .team.selected {
+    background-color: #555;
+  }
+
+  .team.MIN {
+      color: #FFC62F;
+      background-color: #4f2683;
+  }
+  .team.SEA {
+      color: #69be28;
+      background-color: #002244;
+  }

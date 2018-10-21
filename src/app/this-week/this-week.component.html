@@ -1,0 +1,12 @@
+
+<div *ngIf="selectedTeam">Your pick: {{ selectedTeam }}</div>
+
+<p *ngFor="let matchup of matchups">
+  <a (click)="selectTeam(matchup.awayTeam)">
+  <span [ngClass]="setClasses(matchup.awayTeam)">{{ matchup.awayTeam }}</span> 
+  </a>
+  @ 
+  <a (click)="selectTeam(matchup.homeTeam)">
+  <span [ngClass]="setClasses(matchup.homeTeam)">{{ matchup.homeTeam }}</span> 
+  </a>
+</p>

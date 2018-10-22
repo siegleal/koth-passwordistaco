@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start-ng": "ng serve",
+    "start": "ng build && node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "main": "server.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.0",
@@ -20,9 +22,13 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@google-cloud/datastore": "^2.0.0",
     "@types/gapi": "0.0.36",
     "@types/gapi.auth2": "0.0.47",
+    "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
+    "express": "^4.16.4",
+    "path": "^0.12.7",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
@@ -33,7 +39,7 @@
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.9.5",
     "codelyzer": "~4.3.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

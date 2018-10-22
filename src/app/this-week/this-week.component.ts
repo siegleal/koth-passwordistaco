@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatchupService } from '../matchup.service';
 import { Matchup } from '../matchup';
 
@@ -11,6 +11,8 @@ export class ThisWeekComponent implements OnInit {
   week: number = 4;
   matchups: Matchup[];
   selectedTeam: string;
+  @Input() userEmail: string;
+
 
   constructor(private matchupService: MatchupService) { }
 
@@ -30,6 +32,10 @@ export class ThisWeekComponent implements OnInit {
     }
     classes[team] = true;
     return classes;
+  }
+
+  public submit(): void {
+    console.log('Submitting pick: ' + this.selectedTeam + ' with email: ' + this.userEmail);
   }
 
 }

@@ -4,6 +4,6 @@
   <h2>Hello {{ profile.getGivenName() }} </h2>
   <p>{{ profile.getEmail() }}</p>
   <button (click)="signOut()">Sign out</button>
-  <app-this-week></app-this-week>
+  <app-this-week [userEmail]="profile.getEmail()"></app-this-week>
 </div>
 <div *ngIf="!profile"><button (click)="signIn()">Please log in</button></div>

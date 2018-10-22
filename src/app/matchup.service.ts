@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Matchup } from './matchup'
+import { Matchup } from './matchup';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class MatchupService {
     { week: 4, homeTeam: "NYG", awayTeam: "SEA", homeScore: 0, awayScore: 0},
   ]
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   public getMatchups(week: number): Matchup[]{
     return this.ALLMATCHUPS.filter(m => m.week === 4);
   }
+  
 }

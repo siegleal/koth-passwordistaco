@@ -1,21 +1,52 @@
+.container {
+    width: 300px;
+}
+
+.submitButtonContainer {
+    padding-top: .5em;
+    display:flex;
+    justify-content: center;
+}
+
+.submitButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    width: 100px;
+    height: 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: #eee;
+    cursor: auto;
+}
+
 .team {
     cursor: pointer;
-    position: relative;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #EEE;
-    margin: .75em;
-    padding: .5em;
-    height: 1.6em;
+    height: 2em;
+    width: 100px;
     border-radius: 4px;
+  }
+
+  .matchup {
+      display: flex;
+      justify-content: space-around;
+      padding-top: .5em;
   }
 
   .team:hover {
       color: #607D8B;
       background-color: #DDD;
-  }
-
-  .team.selected {
-    background-color: #555;
   }
 
   .team.MIN {
@@ -25,4 +56,8 @@
   .team.SEA {
       color: #69be28;
       background-color: #002244;
+  }
+
+  .team.selected {
+    background-color: #bbb;
   }

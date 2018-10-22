@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
         this.apiInit = true;
         console.log("init api");
         this.profile = googleAuth.currentUser.get().getBasicProfile();
-      }
+      });
     });
   }
 
@@ -49,7 +49,7 @@ public signIn(): void {
         googleAuth.signOut();
         console.log('Signing out');
         this.profile = null;
-      }
+      });
     })
   }
 

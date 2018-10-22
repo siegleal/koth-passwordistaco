@@ -1,12 +1,17 @@
+<div class="container">
+<div class="matchup" *ngIf="selectedTeam">Your pick: {{ selectedTeam }}</div>
 
-<div *ngIf="selectedTeam">Your pick: {{ selectedTeam }}</div>
-
-<p *ngFor="let matchup of matchups">
+<div class="matchup" *ngFor="let matchup of matchups">
   <a (click)="selectTeam(matchup.awayTeam)">
-  <span [ngClass]="setClasses(matchup.awayTeam)">{{ matchup.awayTeam }}</span> 
+  <div [ngClass]="setClasses(matchup.awayTeam)">{{ matchup.awayTeam }}</div> 
   </a>
   @ 
   <a (click)="selectTeam(matchup.homeTeam)">
-  <span [ngClass]="setClasses(matchup.homeTeam)">{{ matchup.homeTeam }}</span> 
+  <div [ngClass]="setClasses(matchup.homeTeam)">{{ matchup.homeTeam }}</div> 
   </a>
-</p>
+</div>
+
+<div class="submitButtonContainer">
+  <button class="submitButton" [class.disabled]="!selectedTeam" (click)=submit() [disabled]="!selectedTeam">Submit</button>
+</div>
+</div>

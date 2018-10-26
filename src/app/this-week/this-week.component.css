@@ -36,6 +36,7 @@
     height: 2em;
     width: 100px;
     border-radius: 4px;
+    font-weight: bolder;
   }
 
   .matchup {
@@ -49,13 +50,164 @@
       background-color: #DDD;
   }
 
+  .team.ARI {
+      background-color: #97233F;
+      color: #000;
+  }
+
+  .team.ATL {
+      background-color: #A71930;
+      color: #000;
+  }
+
+  .team.BAL {
+      color:#000;
+      background-color: #241773;
+  }
+
+  .team.BUF {
+      color: #c60c30;
+      background-color: #00228d;
+  }
+
+  .team.CAR {
+      color: #0085ca;
+      background-color: #101820;
+  }
+
+  .team.CHI {
+      color: #c83803;
+      background-color: #0b162a;
+  }
+
+  .team.CIN {
+      color: #000;
+      background-color: #fb4f14;
+  }
+
+  .team.CLE {
+      color: #ec5614;
+      background-color: #342624;
+  }
+
+  .team.DAL {
+      color: #fff;
+      background-color: #041e42;
+  }
+
+  .team.DEN {
+      color: #002244;
+      background-color: #fb4f14;
+  }
+
+  .team.DET {
+      color: #b0b7bc;
+      background-color: #0076b6;
+  }
+
+  .team.GB {
+      color: #ffb612;
+      background-color: #203731;
+  }
+
+  .team.HOU {
+      color: #a71930;
+      background-color: #03202f;
+  }
+
+  .team.IND {
+      color: #a2aaad;
+      background-color: #002c5f;
+  }
+
+  .team.JAX {
+      color: #d7a22a;
+      background-color: #006778;
+  }
+
+  .team.KC {
+      color: #e31837;
+      background-color: #ffb81c;
+  }
+
+  .team.LAC {
+      color: #ffc20e;
+      background-color: #0080c6;
+  }
+
+  .team.LAR {
+      background-color: #002244;
+      color: #866d4b;
+  }
+
+  .team.MIA {
+      color: #f26a24;
+      background-color: #008e87;
+  }
+
   .team.MIN {
       color: #FFC62F;
       background-color: #4f2683;
   }
+
+  .team.NE {
+      color: #c60c30;
+      background-color: #002244;
+  }
+
+  .team.NO {
+      color: #101820;
+      background-color: #d3bc8d;
+  }
+
+  .team.NYG {
+      color: #a71930;
+      background-color: #0b2265;
+  }
+
+  .team.NYJ {
+      color: #FFF;
+      background-color: #003f2d;
+  }
+
+  .team.OAK {
+      color: #a5acaf;
+      background-color: #000;
+  }
+
+  .team.PHI {
+      color: #a5acaf;
+      background-color: #004c54;
+  }
+
+  .team.PIT {
+      color: #ffb612;
+      background-color: #101820;
+  }
+
+  .team.SF {
+      color: #a00;
+      background-color: #b3995d;
+  }
+
   .team.SEA {
       color: #69be28;
       background-color: #002244;
+  }
+
+  .team.TB {
+      color: #d50a0a;
+      background-color: #0a0a08;
+  }
+
+  .team.TEN {
+      color: #4495d1;
+      background-color: #002a5c;
+  }
+
+  .team.WAS {
+      color: #ffb612;
+      background-color: #773141;
   }
 
   .team.selected {

@@ -17,7 +17,9 @@ export class ThisWeekComponent implements OnInit {
   constructor(private matchupService: MatchupService) { }
 
   ngOnInit() {
-  this.matchupService.getMatchups(this.week).subscribe(data => console.log(data));
+  this.matchupService.getMatchups(this.week).subscribe(data => {
+    this.matchups = data;
+  });
   }
 
   public selectTeam(team: string): void {

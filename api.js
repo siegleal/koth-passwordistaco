@@ -10,6 +10,19 @@ router.get('/schedule', (req, res) => {
 	res.json(schedule);
 });
 
+
+router.get('/schedule/:week', (req, res) => {
+    var week = parseInt(req.params.week);
+    if (week < 1 || week > 17){
+        res.sendStatus(500);
+    } else {
+        var fs = require('fs');
+        var schedule = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+        var filtered = schedule.filter(m => m.week === week);
+        res.json(filtered);
+    }
+});
+
 /* GET api listing. */
 router.post('/makeMatchup', (req, res) => {
     var week =  parseInt(req.body.week);

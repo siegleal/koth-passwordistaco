@@ -5,12 +5,9 @@ const fs = require('fs');
 const router = express.Router();
 
 router.get('/schedule', (req, res) => {
-    fs.readFile(__dirname + '/test.txt', function (err, data) {
-        if (err) {
-            throw err;
-        }
-        console.log(data.toString());
-    });
+	var fs = require('fs');
+	var schedule = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+	res.json(schedule);
 });
 
 /* GET api listing. */

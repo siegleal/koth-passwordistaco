@@ -19,8 +19,8 @@ export class MatchupService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getMatchups(week: number): Matchup[]{
-    return this.ALLMATCHUPS.filter(m => m.week === 4);
+  public getMatchups(week: number): Observable<Object>{
+    return this.httpClient.get('/api/schedule');
   }
   
 }

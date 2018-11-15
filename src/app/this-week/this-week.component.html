@@ -7,7 +7,7 @@
   </div>
   <div class="center">
   <input [(ngModel)]="pick.email" type="email" placeholder="Email Address">
-  <button (click)=getPreviousPicks(pick.email)>See previous pics</button>
+  <button (click)=getPreviousPicks(pick.email)>See previous picks</button>
   </div>
   <div *ngIf="error"  class="alert center">
    {{ error }}

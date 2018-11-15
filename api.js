@@ -22,6 +22,48 @@ function getDatastore(){
     });
 }
 
+const USERS = [
+	{"name": "Alex", "email": "alexander.pavlakis90@gmail.com"},
+	{"name": "Andrew", "email": "asiegle@gmail.com"},
+	{"name": "Michael", "email": "seagull798@gmail.com"},
+	{"name": "Joel", "email": "joeljones531@gmail.com"},
+	{"name": "Geralyn", "email": "geralynroz1529@gmail.com"},
+	{"name": "Eric", "email": "egibbons1990@gmail.com"},
+	{"name": "Aly", "email": "alyg@dayspringvalpo.org.com"},
+	{"name": "Nick", "email": "nickwest1016@gmail.com"},
+	{"name": "Erica", "email": "ericawest1012@gmail.com"},
+	{"name": "Chelsea", "email": "cdoy1125@gmail.com"},
+	{"name": "Thomas", "email": "teumerthomas74@gmail.com"},
+	{"name": "Matt", "email": "moleary5252@gmail.com"},
+	{"name": "Erin", "email": "emcoulson24@gmail.com"}
+];
+
+function getAllUsers(){
+	return USERS;
+}
+
+router.get('/getNotResponded/:week', (req, res) => {
+	var week = parseInt(req.params.week);
+	
+	const datastore = getDatastore();
+
+    const query = datastore.createQuery('Pick');
+
+    query.filter('week', week);
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+        }
+        console.log(entities);
+        var responded = entities.map(p => p.email);
+        
+        res.json(USERS.filter(u => !responded.includes(u.email)).map(u => u.name));
+    });
+
+	
+});
+
 
 router.get('/schedule/:week', (req, res) => {
     var week = parseInt(req.params.week);
@@ -51,6 +93,7 @@ router.put('/batchPicks/', (req, res) => {
         makePick({week: i, email: email, team: picks[i-1]}, res);
     }
 });
+
 
 router.get('/getPicks/:week', (req, res) =>{
     var week = parseInt(req.params.week);

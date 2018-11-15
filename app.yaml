@@ -1,7 +1,5 @@
 runtime: nodejs8
 service: default
-env_variables:
-        PORT: 80
 handlers:
         - url: /
           static_files: dist/koth-passwordistaco/index.html

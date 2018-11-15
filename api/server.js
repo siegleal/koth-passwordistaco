@@ -14,15 +14,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist/koth-passwordistaco')));
+//app.use(express.static(path.join(__dirname, 'dist/koth-passwordistaco')));
 
 // Set our api routes
-app.use('/api', api);
-
-// Catch all other routes and return the index file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/koth-passwordistaco/index.html'));
-});
+app.use('/', api);
+// app.get('/', (req, res) => {
+//   res.status(200).send('Hello world').end();
+// })
 
 /**
  * Get port from environment and store in Express.

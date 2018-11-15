@@ -22,17 +22,25 @@ function getDatastore(){
     });
 }
 
+
 router.get('/schedule/:week', (req, res) => {
     var week = parseInt(req.params.week);
-    if (week < 1 || week > 17){
-        res.sendStatus(500);
-    } else {
-        var fs = require('fs');
-        var schedule = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
-        var filtered = schedule.filter(m => m.week === week);
-        res.json(filtered);
-    }
+	const datastore = getDatastore();
+
+    const query = datastore.createQuery('Matchup');
+
+    query.filter('week', week);
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+        }
+
+        res.json(entities);
+    });
 });
+
+
 
 router.put('/batchPicks/', (req, res) => {
     let email = req.body.email;
@@ -133,46 +141,27 @@ function makePick(inputPick, res){
 
 }
 
-router.put('/makePick', (req, res) => {
-    var week = parseInt(req.body.week);
-    var email = req.body.email;
-    var team = req.body.team;
-
-    makePick({week: week, email: email, team: team} , res);
-
-});
-
-/* GET api listing. */
-router.post('/makeMatchup', (req, res) => {
-    var week =  parseInt(req.body.week);
-    var homeTeam = req.body.homeTeam;
-    var awayTeam = req.body.awayTeam;
-
-    // Imports the Google Cloud client library
-    const Datastore = require('@google-cloud/datastore');
-
-    // Your Google Cloud Platform project ID
-    const projectId = 'passwordistaco-218204';
-
-    // Creates a client
-    const datastore = new Datastore({
-        projectId: projectId,
-    });
+router.get('/storeSchedule', (req, res) => {
+	 const datastore = getDatastore();
 
     // The kind for the new entity
-    const kind = 'MatchupScore';
-    // The name/ID for the new entity
-    const name = week+homeTeam+awayTeam;
+    const kind = 'Matchup';
     // The Cloud Datastore key for the new entity
-    const scoreKey = datastore.key([kind, name]);
+    
+    var fs = require('fs');
+        var schedule = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+        
+    for (var i = 0; i < schedule.length; i++){
+    var currmatchup = schedule[i];
 
+	var key = datastore.key([kind, currmatchup.week+currmatchup.awayTeam+currmatchup.homeTeam])
     // Prepares the new entity
-    const score = {
-        key:scoreKey,
+    const matchup = {
+        key:key ,
         data: {
-            week: parseInt(week),
-            homeTeam: homeTeam,
-            awayTeam: awayTeam,
+            week: parseInt(currmatchup.week),
+            homeTeam: currmatchup.homeTeam,
+            awayTeam: currmatchup.awayTeam,
             homeScore: 0,
             awayScore: 0
         },
@@ -180,15 +169,27 @@ router.post('/makeMatchup', (req, res) => {
 
     // Saves the entity
     datastore
-        .save(score)
+        .save(matchup)
         .then(() => {
-            console.log(`Saved ${score.key.name}: ${score.data.homeTeam} and ${score.data.awayTeam}`);
+            console.log(`Saved ${matchup.data.week}: ${matchup.data.awayTeam} at ${matchup.data.homeTeam}`);
             res.status(200).send();
         })
         .catch(err => {
             console.error('ERROR:', err);
             res.status(500).send();
         });
+    }
+
+
+});
+
+router.put('/makePick', (req, res) => {
+    var week = parseInt(req.body.week);
+    var email = req.body.email;
+    var team = req.body.team;
+
+    makePick({week: week, email: email, team: team} , res);
+
 });
 
 module.exports = router;

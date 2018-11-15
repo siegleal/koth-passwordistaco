@@ -19,15 +19,15 @@ export class AppComponent implements OnInit{
   constructor(private gapiService: GapiService, private ngZone: NgZone){}
 
   ngOnInit() {
-    this.gapiService.loadGapi().then(() => {
-      this.apiLoaded = true;
-      console.log("loaded api");
-      this.gapiService.initAuth().then(googleAuth => {
-        this.apiInit = true;
-        console.log("init api");
-        this.profile = googleAuth.currentUser.get().getBasicProfile();
-      });
-    });
+    // this.gapiService.loadGapi().then(() => {
+    //   this.apiLoaded = true;
+    //   console.log("loaded api");
+    //   this.gapiService.initAuth().then(googleAuth => {
+    //     this.apiInit = true;
+    //     console.log("init api");
+    //     this.profile = googleAuth.currentUser.get().getBasicProfile();
+    //   });
+    // });
   }
 
 public signIn(): void {

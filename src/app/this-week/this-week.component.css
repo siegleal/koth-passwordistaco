@@ -1,11 +1,12 @@
 .container {
     width: 300px;
+    margin: auto;
 }
+
 
 .submitButtonContainer {
     padding-top: .5em;
     display:flex;
-    justify-content: center;
 }
 
 .submitButton {
@@ -27,13 +28,42 @@
     cursor: auto;
 }
 
+.pick {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    font-weight: bolder;
+}
+
+.alert {
+    background-color: lightcoral;
+    color: darkred;
+    height: 1.5em;
+    align-items: center;
+}
+.success {
+    background-color: lightgreen;
+    color: darkgreen;
+    height: 2.5em;
+    align-items: center;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: space-around;
+}
+
 .team {
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background-color: #EEE;
-    height: 2em;
+    height: 3em;
     width: 100px;
     border-radius: 4px;
     font-weight: bolder;
@@ -45,10 +75,7 @@
       padding-top: .5em;
   }
 
-  .team:hover {
-      color: #607D8B;
-      background-color: #DDD;
-  }
+  
 
   .team.ARI {
       background-color: #97233F;
@@ -210,6 +237,7 @@
       background-color: #773141;
   }
 
-  .team.selected {
+.team.selected {
     background-color: #bbb;
   }
+  

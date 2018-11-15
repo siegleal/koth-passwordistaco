@@ -1,17 +1,33 @@
 <div class="container">
-<div class="matchup" *ngIf="selectedTeam">Your pick: {{ selectedTeam }}</div>
+  <div class="center">
+    Week {{ week }}
+  </div>
+ <div *ngIf="success"  class="success center">
+   {{ success }}
+  </div>
+  <div class="center">
+  <input [(ngModel)]="pick.email" type="email" placeholder="Email Address">
+  </div>
+  <div *ngIf="error"  class="alert center">
+   {{ error }}
+  </div>
+ 
+<div align="center" class="pick">
+  Your pick:&nbsp;<span *ngIf="selectedTeam">{{ selectedTeam }} </span>
+ </div>
+
+<div class="submitButtonContainer center">
+  <button class="submitButton" [class.disabled]="!selectedTeam" (click)=submit() [disabled]="!selectedTeam">Submit</button>
+</div>
 
 <div class="matchup" *ngFor="let matchup of matchups">
   <a (click)="selectTeam(matchup.awayTeam)">
-  <div [ngClass]="setClasses(matchup.awayTeam)">{{ matchup.awayTeam }}</div> 
+  <div [ngClass]="setClasses(matchup.awayTeam)">{{ getTeamName(matchup.awayTeam) }}</div> 
   </a>
   @ 
   <a (click)="selectTeam(matchup.homeTeam)">
-  <div [ngClass]="setClasses(matchup.homeTeam)">{{ matchup.homeTeam }}</div> 
+  <div [ngClass]="setClasses(matchup.homeTeam)">{{ getTeamName(matchup.homeTeam) }}</div> 
   </a>
 </div>
 
-<div class="submitButtonContainer">
-  <button class="submitButton" [class.disabled]="!selectedTeam" (click)=submit() [disabled]="!selectedTeam">Submit</button>
-</div>
 </div>

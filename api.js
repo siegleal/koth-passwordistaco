@@ -1,13 +1,9 @@
 const express = require('express');
-const path = require('path');
 const bodyparser = require('body-parser');
 const fs = require('fs');
 const router = express.Router();
 
-
-
 router.get('/schedule', (req, res) => {
-	var fs = require('fs');
 	var schedule = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
 	res.json(schedule);
 });
@@ -46,7 +42,7 @@ router.put('/batchPicks/', (req, res) => {
     for (var i = 1; i < picks.length + 1; i++){
         makePick({week: i, email: email, team: picks[i-1]}, res);
     }
-})
+});
 
 router.get('/getPicks/:week', (req, res) =>{
     var week = parseInt(req.params.week);
@@ -59,17 +55,19 @@ router.get('/getPicks/:week', (req, res) =>{
 
     datastore.runQuery(query, (err, entities) => {
         if (err){
-            console.log('Error getting entities: ' + err)
+            console.log('Error getting entities: ' + err);
         }
         console.log(entities);
         res.json(entities);
-    })
+    });
 
 
 });
 
 router.get('/getPicks', (req, res) =>{
     var email = req.query.e;
+    var currWeek = parseInt(req.query.w);
+    
     if (email === undefined){
         res.status(400).send();
         return;
@@ -83,11 +81,15 @@ router.get('/getPicks', (req, res) =>{
 
     datastore.runQuery(query, (err, entities) => {
         if (err){
-            console.log('Error getting entities: ' + err)
+            console.log('Error getting entities: ' + err);
         }
-        entities.sort(function(a,b) {return a.week - b.week});
+        if (req.query.w !== undefined){
+        entities = entities.filter(p => p.week < currWeek);
+    	}
+
+        entities.sort(function(a,b) {return a.week - b.week;});
         res.json(entities);
-    })
+    });
 
 
 });
@@ -112,7 +114,8 @@ function makePick(inputPick, res){
         data: {
             week: parseInt(week),
             email: email,
-            team: team
+            team: team,
+            points: 0
         },
     };
 

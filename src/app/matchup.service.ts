@@ -13,7 +13,7 @@ export class MatchupService {
   constructor(private httpClient: HttpClient) { }
 
   public getMatchups(week: number): Observable<Matchup[]>{
-    return this.httpClient.get<Matchup[]>(this.baseUrl + "/schedule/" + week);
+    return this.httpClient.get<Matchup[]>(this.baseUrl + "/api/schedule/" + week);
   }
 
 }

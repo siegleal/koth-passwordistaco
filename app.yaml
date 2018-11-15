@@ -1,9 +1,9 @@
 runtime: nodejs8
 service: default
-handlers:
-        - url: /
-          static_files: dist/koth-passwordistaco/index.html
-          upload: dist/koth-passwordistaco/index.html
-    
-        - url: /
-          static_dir: dist/koth-passwordistaco
+#handlers:
+#        - url: /
+#          static_files: dist/koth-passwordistaco/index.html
+#          upload: dist/koth-passwordistaco/index.html
+#    
+#        - url: /
+#          static_dir: dist/koth-passwordistaco

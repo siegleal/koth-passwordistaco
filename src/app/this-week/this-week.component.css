@@ -28,6 +28,28 @@
     cursor: auto;
 }
 
+ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.prevContainer {
+	height: auto;
+}
+
+li.prevpick {
+  	position: relative;
+  	background-color: #EEE;
+  	margin: .5em;
+  	height: 1.6em;
+  	width: 3em;
+  	border-radius: 4px;
+  	display: flex;
+  	justify-content: center;
+  	align-items:center;
+  	float: left;
+}
+
 .pick {
     width: auto;
     display: flex;
@@ -35,7 +57,10 @@
     align-items: center;
     height: 2em;
     font-weight: bolder;
+    clear: both;
 }
+
+
 
 .alert {
     background-color: lightcoral;
@@ -88,8 +113,8 @@
   }
 
   .team.BAL {
-      color:#000;
-      background-color: #241773;
+      color:#241773;
+      background-color: #000;
   }
 
   .team.BUF {
@@ -240,4 +265,11 @@
 .team.selected {
     background-color: #bbb;
   }
+  
+.team.picked {
+	text-decoration: line-through;
+	cursor: auto;
+	background-color: #ccc;
+	color: #444;
+}  
   

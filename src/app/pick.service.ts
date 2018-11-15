@@ -13,14 +13,14 @@ export class PickService {
   constructor(private httpClient: HttpClient) { }
 
   public putPick(pick: Pick): Observable<Pick> {
-    return this.httpClient.put<Pick>(this.baseUrl + '/makePick/', pick);
+    return this.httpClient.put<Pick>(this.baseUrl + '/api/makePick/', pick);
   }
 
   public getPicksForWeek(week: number): Observable<Pick[]> {
-    return this.httpClient.get<Pick[]>(this.baseUrl + '/getPicks/' + week);
+    return this.httpClient.get<Pick[]>(this.baseUrl + '/api/getPicks/' + week);
   }
 
-  public getPicksForUser(email: string): Observable<Pick[]> {
-    return this.httpClient.get<Pick[]>(this.baseUrl + '/getPicks?e=' + email);
+  public getPicksForUser(email: string, currWeek: number): Observable<Pick[]> {
+    return this.httpClient.get<Pick[]>(this.baseUrl + '/api/getPicks?e=' + email + "&w=" + currWeek);
   }
 }

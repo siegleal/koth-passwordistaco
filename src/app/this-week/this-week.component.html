@@ -7,10 +7,17 @@
   </div>
   <div class="center">
   <input [(ngModel)]="pick.email" type="email" placeholder="Email Address">
+  <button (click)=getPreviousPicks(pick.email)>See previous pics</button>
   </div>
   <div *ngIf="error"  class="alert center">
    {{ error }}
   </div>
+ 
+<div class="prevContainer">
+<ul>
+<li *ngFor="let prev of previousPicks" class="prevpick">{{ prev.team }}</li>
+</ul>
+</div>
  
 <div align="center" class="pick">
   Your pick:&nbsp;<span *ngIf="selectedTeam">{{ selectedTeam }} </span>

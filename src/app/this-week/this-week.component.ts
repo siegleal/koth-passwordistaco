@@ -17,6 +17,7 @@ export class ThisWeekComponent implements OnInit {
   pick: Pick;
   error: string;
   success: string;
+  previousPicks: Pick[];
 
 
   constructor(private matchupService: MatchupService, 
@@ -35,17 +36,31 @@ export class ThisWeekComponent implements OnInit {
   public getTeamName(teamAbbr: string): string {
     return this.teamnamesService.getFullTeamName(teamAbbr);
   }
+  
+  public getPreviousPicks(email: string): void {
+  	this.pickService.getPicksForUser(email, this.week).subscribe(
+  		picks => this.previousPicks = picks
+  	);
+  }
 
   public selectTeam(team: string): void {
-    this.selectedTeam = team;
-    this.pick.team = team;
+  	if (!this.hasPickedTeam(team)){
+    	this.selectedTeam = team;
+    	this.pick.team = team;
+	}
 
+
+  }
+  
+  private hasPickedTeam(team: string): boolean{
+  	return this.previousPicks !== undefined ? this.previousPicks.map(p => p.team).includes(team) : false;
   }
 
   public setClasses(team: string): any {
     let classes = {
       'team': true,
       'selected': team === this.selectedTeam,
+      'picked': this.hasPickedTeam(team),
     }
     classes[team] = true;
     return classes;

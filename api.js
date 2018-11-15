@@ -55,7 +55,6 @@ router.get('/getNotResponded/:week', (req, res) => {
         if (err){
             console.log('Error getting entities: ' + err);
         }
-        console.log(entities);
         var responded = entities.map(p => p.email);
         
         res.json(USERS.filter(u => !responded.includes(u.email)).map(u => u.name));
@@ -108,7 +107,7 @@ router.get('/getPicks/:week', (req, res) =>{
         if (err){
             console.log('Error getting entities: ' + err);
         }
-        console.log(entities);
+
         res.json(entities);
     });
 
@@ -174,7 +173,7 @@ function makePick(inputPick, res){
     datastore
         .save(pick)
         .then(() => {
-            console.log(`Saved ${pick.key.name}: ${pick.data.email} and ${pick.data.team}`);
+            console.log(`Saved pick: ${pick.data.email} and ${pick.data.team}`);
             res.status(200).send();
         })
         .catch(err => {

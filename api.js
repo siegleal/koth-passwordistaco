@@ -29,7 +29,7 @@ const USERS = [
 	{"name": "Joel", "email": "joeljones531@gmail.com"},
 	{"name": "Geralyn", "email": "geralynroz1529@gmail.com"},
 	{"name": "Eric", "email": "egibbons1990@gmail.com"},
-	{"name": "Aly", "email": "alyg@dayspringvalpo.org.com"},
+	{"name": "Aly", "email": "alyg@dayspringvalpo.org"},
 	{"name": "Nick", "email": "nickwest1016@gmail.com"},
 	{"name": "Erica", "email": "ericawest1012@gmail.com"},
 	{"name": "Chelsea", "email": "cdoy1125@gmail.com"},

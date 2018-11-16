@@ -18,6 +18,7 @@ export class ThisWeekComponent implements OnInit {
   error: string;
   success: string;
   previousPicks: Pick[];
+  deadlinePassed: boolean = true;
 
 
   constructor(private matchupService: MatchupService, 
@@ -44,7 +45,7 @@ export class ThisWeekComponent implements OnInit {
   }
 
   public selectTeam(team: string): void {
-  	if (!this.hasPickedTeam(team)){
+  	if (!this.hasPickedTeam(team) && !this.deadlinePassed){
     	this.selectedTeam = team;
     	this.pick.team = team;
 	}

@@ -8,7 +8,7 @@ import { Pick }	from '../pick';
   styleUrls: ['./released.component.css']
 })
 export class ReleasedComponent implements OnInit {
-	week: number = 10;
+	week: number = 11;
 	picks: Pick[];
 
   constructor(private pickService: PickService) { }

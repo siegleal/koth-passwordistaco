@@ -1,0 +1,9 @@
+<div class="container">
+<h2>Week {{ week }} picks</h2>
+<table>
+<tr><td>Name</td><td>Team</td></tr>
+<tr *ngFor="let pick of picks">
+	<td>{{ getNameFromEmail(pick.email) }}</td><td> {{ pick.team }}</td>
+</tr>
+</table>
+</div>

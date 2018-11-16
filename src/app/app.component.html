@@ -1,9 +1,14 @@
+<div class="container">
 <h1 align="center">King of the Hill</h1>
 
+<nav>
+  <a routerLink="/pick">Pick This Week</a>
+  <a routerLink="/released">Everyone Else's Picks</a>
+</nav>
+
 <!--*ngIf="profile"-->
-<div >
-  <app-this-week></app-this-week>
-</div>
+  <router-outlet></router-outlet>
+ </div>
 <!--
 
 <div *ngIf="!profile"><button (click)="signIn()">Please log in</button></div>

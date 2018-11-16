@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ThisWeekComponent } from './this-week/this-week.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { ReleasedComponent } from './released/released.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ThisWeekComponent,
+    ReleasedComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@ import { Pick } from '../pick';
   styleUrls: ['./this-week.component.css']
 })
 export class ThisWeekComponent implements OnInit {
-  week: number = 11;
+  week: number = 12;
   matchups: Matchup[];
   selectedTeam: string;
   pick: Pick;

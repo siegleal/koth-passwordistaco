@@ -9,7 +9,7 @@ import { Users } from '../users';
   styleUrls: ['./standings.component.css']
 })
 export class StandingsComponent implements OnInit {
-private allPicks: PicksForUser[] = [];
+  allPicks: PicksForUser[] = [];
 
 
   constructor(private pickService: PickService) { }

@@ -11,7 +11,7 @@ import { PicksForUser } from '../picksforuser';
 })
 export class AdminPicksComponent implements OnInit {
   
-  private allPicks: PicksForUser[] = [];
+  allPicks: PicksForUser[] = [];
 
 
   constructor(private pickService: PickService) { }

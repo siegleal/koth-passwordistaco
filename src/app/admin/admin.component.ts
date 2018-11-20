@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchupService } from '../matchup.service';
-import { ScoreDetailComponent } from '../score-detail/score-detail.component';
 import { Matchup } from '../matchup';
 
 @Component({
@@ -9,7 +8,8 @@ import { Matchup } from '../matchup';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  private matchups: Matchup[];
+  matchups: Matchup[];
+  weekNum: number = 1;
 
   constructor(private matchupService: MatchupService) { }
 

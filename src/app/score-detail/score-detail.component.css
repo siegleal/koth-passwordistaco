@@ -1,0 +1,17 @@
+.cell {
+    text-align: center;
+    width: 100px;
+}
+
+.cell input {
+    width: 80px;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+

@@ -1,1 +1,15 @@
-<input type=number min=1 max=17>
+<input [(ngModel)]=weekNum type=number min=1 max=17 default="1" value="1">
+<button (click)="getMatchups(weekNum)">Load</button>
+
+<div class="scoreContainer">
+    <div class="row">
+            <div class="cell">Home Team</div>
+            <div class="cell">Home Score</div>
+            <div class="cell">Away Score</div>
+            <div class="cell">Away Team</div>
+    </div>
+    <div class="row" *ngFor="let matchup of matchups">
+        <score-detail [matchup]="matchup"></score-detail>
+    </div>
+    <button (click)="saveMatchups()">Submit</button>
+</div>

@@ -63,6 +63,75 @@ router.get('/getNotResponded/:week', (req, res) => {
 	
 });
 
+router.put('/weeklyscore/', (req, res) => {
+    var datastore = getDatastore();
+    console.log('entering weekly score');
+
+    let data = req.body;
+
+
+    // The kind for the new entity
+    const kind = 'WeeklyScore';
+    // The Cloud Datastore key for the new entity
+
+	var key = datastore.key([kind, data.week+data.team])
+    // Prepares the new entity
+    const weeklyscore = {
+        key:key ,
+        data: {
+            week: parseInt(data.week),
+            team: data.team,
+            score: data.score,
+            diff: data.diff
+        },
+    };
+
+    // Saves the entity
+    datastore
+        .save(weeklyscore)
+        .then(() => {
+            res.status(200).send();
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+            res.status(500).send();
+        });
+});
+
+router.put('/schedule/', (req, res) => {
+    console.log('putting matchup');
+    const datastore = getDatastore();
+    let data = req.body;
+
+
+    // The kind for the new entity
+    const kind = 'Matchup';
+    // The Cloud Datastore key for the new entity
+
+	var key = datastore.key([kind, data.week+data.awayTeam+data.homeTeam])
+    // Prepares the new entity
+    const matchup = {
+        key:key ,
+        data: {
+            week: parseInt(data.week),
+            homeTeam: data.homeTeam,
+            awayTeam: data.awayTeam,
+            homeScore: data.homeScore,
+            awayScore: data.awayScore
+        },
+    };
+
+    // Saves the entity
+    datastore
+        .save(matchup)
+        .then(() => {
+            res.status(200).send();
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+            res.status(500).send();
+        });
+});
 
 router.get('/schedule/:week', (req, res) => {
     var week = parseInt(req.params.week);
@@ -114,6 +183,34 @@ router.get('/getPicks/:week', (req, res) =>{
 
 });
 
+router.get('/diff/:team/:week', (req, res) => {
+    let team = req.params.team;
+    let week = parseInt(req.params.week);
+    
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('WeeklyScore');
+
+    query.filter('week', week);
+    query.filter('team', team);
+
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+        }
+        if (entities && entities.length === 1){
+            console.log(entities[0].team + ': ' + entities[0].diff);
+            res.json(entities[0].diff);
+        }
+        else {
+            res.json(0);
+        }
+    });
+
+
+});
+
 router.get('/getPicks', (req, res) =>{
     var email = req.query.e;
     var currWeek = parseInt(req.query.w);
@@ -148,6 +245,10 @@ function makePick(inputPick, res){
     let week = inputPick.week;
     let email = inputPick.email;
     let team = inputPick.team;
+    let points = inputPick.points;
+    if (points === undefined){
+        points = 0;
+    }
 
     const datastore = getDatastore();
 
@@ -165,9 +266,11 @@ function makePick(inputPick, res){
             week: parseInt(week),
             email: email,
             team: team,
-            points: 0
+            points: parseInt(points)
         },
     };
+
+    console.log(pick)
 
     // Saves the entity
     datastore
@@ -229,8 +332,9 @@ router.put('/makePick', (req, res) => {
     var week = parseInt(req.body.week);
     var email = req.body.email;
     var team = req.body.team;
+    var points = req.body.points
 
-    makePick({week: week, email: email, team: team} , res);
+    makePick({week: week, email: email, team: team, points: points} , res);
 
 });
 

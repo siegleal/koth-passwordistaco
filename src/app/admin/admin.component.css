@@ -1,0 +1,24 @@
+.scoreContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.scoreContainer button{
+    justify-content: flex-end;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.cell {
+    text-align: center;
+    width: 100px;
+}
+
+.row:nth-child(even) {
+    background-color: #eee;
+}

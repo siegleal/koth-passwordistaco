@@ -11,13 +11,14 @@ import { Users } from '../users';
 export class StandingsComponent implements OnInit {
   allPicks: PicksForUser[] = [];
   showAll: boolean = false;
+  thruWeek: number = 12;
 
 
   constructor(private pickService: PickService) { }
 
   reload() : void {
     Users.USERS.forEach(user => {
-      this.pickService.getPicksForUser(user.email, 17).subscribe(picks => {
+      this.pickService.getPicksForUser(user.email, this.thruWeek).subscribe(picks => {
         this.allPicks.push(new PicksForUser(user.name, picks));
         this.allPicks.sort((a,b) => a.getTotal() > b.getTotal() ? -1 : 1);
       });

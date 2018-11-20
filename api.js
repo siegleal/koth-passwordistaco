@@ -270,8 +270,6 @@ function makePick(inputPick, res){
         },
     };
 
-    console.log(pick)
-
     // Saves the entity
     datastore
         .save(pick)

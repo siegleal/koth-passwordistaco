@@ -6,3 +6,28 @@ td {
 	border: 1px solid black;
 	padding: .5em;
 }
+
+.toggleButton {
+    background-color: #ff0e0e; /* Green */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    width: 100px;
+    height: 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

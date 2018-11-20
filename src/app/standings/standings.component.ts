@@ -10,6 +10,7 @@ import { Users } from '../users';
 })
 export class StandingsComponent implements OnInit {
   allPicks: PicksForUser[] = [];
+  showAll: boolean = false;
 
 
   constructor(private pickService: PickService) { }
@@ -22,6 +23,10 @@ export class StandingsComponent implements OnInit {
       });
     })
 
+  }
+
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
   }
 
   ngOnInit() {

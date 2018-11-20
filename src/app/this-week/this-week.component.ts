@@ -18,7 +18,7 @@ export class ThisWeekComponent implements OnInit {
   error: string;
   success: string;
   previousPicks: Pick[];
-  deadlinePassed: boolean = true;
+  deadlinePassed: boolean = false;
 
 
   constructor(private matchupService: MatchupService, 

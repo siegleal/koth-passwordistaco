@@ -8,6 +8,8 @@ import { ThisWeekComponent } from './this-week/this-week.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ReleasedComponent } from './released/released.component';
+import { MatchupDetailComponent } from './matchup-detail/matchup-detail.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -17,6 +19,8 @@ import { ReleasedComponent } from './released/released.component';
     LoginComponent,
     ThisWeekComponent,
     ReleasedComponent,
+    MatchupDetailComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

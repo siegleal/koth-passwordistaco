@@ -214,6 +214,96 @@ router.get('/diff/:team/:week', (req, res) => {
 
 });
 
+/* Returns a dict of an array of picks per user with the email as the key */
+router.get('/allpicks/user/:email/:notIncluding', (req, res) => {
+    let tilWeek = parseInt(req.params.notIncluding);
+    let email = req.params.email;
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Pick')
+    query.filter('email',email);
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+            return;
+        }
+        
+
+        res.json(entities.filter(x => x.week < tilWeek).sort((a,b) => {return a.week - b.week}));
+    });
+})
+
+
+/* Returns a dict of an array of picks per user with the email as the key */
+router.get('/allpicks/user/:email', (req, res) => {
+    let email = req.params.email;
+    console.log('getting picks for ' + email);
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Pick')
+    query.filter('email', email);
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+            return;
+        }
+       res.json(entities.sort((a,b) => { return parseInt(a.week) - parseInt(b.week)}));
+    });
+})
+
+
+
+/* Returns a dict of an array of picks per user with the email as the key */
+router.get('/allpicks/:notIncluding', (req, res) => {
+    let tilWeek = parseInt(req.params.notIncluding);
+    console.log(tilWeek);
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Pick')
+    query.filter('week', '<', tilWeek);
+    query.order('week');
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+            return;
+        }
+        let reduced = entities.reduce((rv, curr) => {
+            if (rv[curr.email] === undefined) { rv[curr.email] = [] }
+            rv[curr.email].push(curr);
+            return rv;
+        }, {});
+
+        res.json(reduced);
+    });
+})
+
+/* Returns a dict of an array of picks per user with the email as the key */
+router.get('/allpicks', (req, res) => {
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Pick').order('week');
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+        }
+        let reduced = entities.reduce((rv, curr) => {
+            if (rv[curr.email] === undefined) { rv[curr.email] = [] }
+            rv[curr.email].push(curr);
+            return rv;
+        }, {});
+
+        res.json(reduced);
+    });
+})
+
 router.get('/getPicks', (req, res) =>{
     var email = req.query.e;
     var currWeek = parseInt(req.query.w);

@@ -18,12 +18,13 @@ export class MatchupService {
   }
 
   public saveMatchups(matchups: Matchup[]): void {
+    this.httpClient.put<Matchup>(this.baseUrl + '/api/schedule/', matchups).subscribe();
+    let weeklyScores: WeeklyScore[] = [];
     matchups.forEach( elem => {
-      this.httpClient.put<Matchup>(this.baseUrl + '/api/schedule/', elem).subscribe(json => console.log(json));
-      this.httpClient.put<WeeklyScore>(this.baseUrl + '/api/weeklyscore/', WeeklyScore.fromMatchup(elem, true)).subscribe(json => console.log(json));
-      this.httpClient.put<WeeklyScore>(this.baseUrl + '/api/weeklyscore/', WeeklyScore.fromMatchup(elem, false)).subscribe(json => console.log (json));
+        weeklyScores.push(WeeklyScore.fromMatchup(elem, true));
+        weeklyScores.push(WeeklyScore.fromMatchup(elem, false));
     })
-
+    this.httpClient.put<WeeklyScore[]>(this.baseUrl + '/api/weeklyscore/', weeklyScores).subscribe();
   }
 
 }

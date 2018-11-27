@@ -15,7 +15,7 @@ export class PickService {
   constructor(private httpClient: HttpClient) { }
 
   public putPick(pick: Pick): Observable<Pick> {
-    return this.httpClient.put<Pick>(this.baseUrl + '/api/makePick/', pick);
+    return this.httpClient.put<Pick>(this.baseUrl + '/api/pick/', pick);
   }
 
   public getPicksForWeek(week: number): Observable<Pick[]> {

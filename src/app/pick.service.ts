@@ -5,6 +5,7 @@ import { Observable, of, zip } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Users } from './users';
 import { PicksForUser } from './picksforuser';
+import { UserPick } from './userpick';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class PickService {
 
   public putPick(pick: Pick): Observable<Pick> {
     return this.httpClient.put<Pick>(this.baseUrl + '/api/pick/', pick);
+  }
+
+  public getAllPicksBeforeWeek(thruWeek: number): Observable<UserPick[]> {
+    return this.httpClient.get<UserPick[]>(this.baseUrl + '/api/allpicks/' + thruWeek);
   }
 
   public getPicksForWeek(week: number): Observable<Pick[]> {

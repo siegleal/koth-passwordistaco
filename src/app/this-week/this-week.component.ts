@@ -4,6 +4,7 @@ import { TeamnamesService } from '../teamnames.service';
 import { PickService } from '../pick.service';
 import { Matchup } from '../matchup';
 import { Pick } from '../pick';
+import { WeekService } from '../week.service';
 
 @Component({
   selector: 'app-this-week',
@@ -11,7 +12,7 @@ import { Pick } from '../pick';
   styleUrls: ['./this-week.component.css']
 })
 export class ThisWeekComponent implements OnInit {
-  week: number = 12;
+  week: number;
   matchups: Matchup[];
   selectedTeam: string;
   pick: Pick;
@@ -23,15 +24,19 @@ export class ThisWeekComponent implements OnInit {
 
   constructor(private matchupService: MatchupService, 
     private teamnamesService: TeamnamesService,
-    private pickService: PickService) {
+    private pickService: PickService,
+    private weekService: WeekService) {
     this.pick = new Pick();
-    this.pick.week = this.week;
    }
 
   ngOnInit() {
-  this.matchupService.getMatchups(this.week).subscribe(data => {
-    this.matchups = data;
-  });
+  this.weekService.getReleasedAndCurrent().subscribe(data =>{
+    this.week = data.current;
+    this.matchupService.getMatchups(data.current).subscribe(data => {
+      this.matchups = data;
+    });
+    this.deadlinePassed = data.released === data.current;
+  })
   }
 
   public getTeamName(teamAbbr: string): string {
@@ -74,6 +79,7 @@ export class ThisWeekComponent implements OnInit {
       this.success = '';
     } else{
       if (this.pick.email.match(/[a-zA-z0-9]+@(gmail\.com|dayspringvalpo\.org)/g) != null ){
+        this.pick.week = this.week;
       console.log('Submitting pick: ' + this.selectedTeam + ' with email: ' + this.pick.email);
       this.error = '';
       this.success = 'Submitted pick ' + this.selectedTeam + ' as ' + this.pick.email;

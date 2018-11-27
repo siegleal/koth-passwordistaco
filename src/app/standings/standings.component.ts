@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PicksForUser } from '../picksforuser';
 import { PickService } from '../pick.service';
-import { Users } from '../users';
+import { WeekService } from '../week.service';
+import { UserPick } from '../userpick';
 
 @Component({
   selector: 'app-standings',
@@ -9,29 +9,23 @@ import { Users } from '../users';
   styleUrls: ['./standings.component.css']
 })
 export class StandingsComponent implements OnInit {
-  allPicks: PicksForUser[] = [];
+  allPicks: UserPick[];
   showAll: boolean = false;
-  thruWeek: number = 13;
+  thruWeek: number;
 
 
-  constructor(private pickService: PickService) { }
-
-  reload() : void {
-    Users.USERS.forEach(user => {
-      this.pickService.getPicksForUser(user.email, this.thruWeek).subscribe(picks => {
-        this.allPicks.push(new PicksForUser(user.name, picks));
-        this.allPicks.sort((a,b) => a.getTotal() > b.getTotal() ? -1 : 1);
-      });
-    })
-
-  }
+  constructor(private pickService: PickService, private weekService: WeekService) { }
 
   toggleShowAll(): void {
     this.showAll = !this.showAll;
   }
 
   ngOnInit() {
-    this.reload();
+    this.weekService.getCurrentWeek().subscribe(week => {
+      this.pickService.getAllPicksBeforeWeek(week).subscribe( userpicks => {
+        this.allPicks = userpicks.map<UserPick>(x => new UserPick(x)).sort((x,y) => y.getTotal() -x.getTotal());
+      })
+    })
   }
 
 }

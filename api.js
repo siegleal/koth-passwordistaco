@@ -278,8 +278,18 @@ router.get('/allpicks/:notIncluding', (req, res) => {
             rv[curr.email].push(curr);
             return rv;
         }, {});
+       
+        // morph into array of UserPicks
+        let result = [];
+        for (var key in reduced) {
+            result.push({
+                email: key, 
+                name: USERS.find(x => x.email === key).name,
+                picks: reduced[key],
+            })
+        }
 
-        res.json(reduced);
+        res.json(result);
     });
 })
 
@@ -294,13 +304,24 @@ router.get('/allpicks', (req, res) => {
             console.log('Error getting entities: ' + err);
             res.status(500).send();
         }
+        // create a dict with email as key and picks as values
         let reduced = entities.reduce((rv, curr) => {
             if (rv[curr.email] === undefined) { rv[curr.email] = [] }
             rv[curr.email].push(curr);
             return rv;
         }, {});
 
-        res.json(reduced);
+        // morph into array of UserPicks
+        let result = [];
+        for (var key in reduced) {
+            result.push({
+                email: key, 
+                name: USERS.find(x => x.email === key).name,
+                picks: reduced[key],
+            })
+        }
+
+        res.json(result);
     });
 })
 
@@ -431,5 +452,50 @@ router.put('/pick', (req, res) => {
 
 
 });
+
+router.get('/week/released', (req, res) => {
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Week');
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+        }
+
+        res.json(entities[0].released);
+    });
+})
+
+router.get('/week/current', (req, res) => {
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Week');
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+        }
+
+        res.json(entities[0].current)
+    });
+})
+
+router.get('/week', (req, res) => {
+    const datastore = getDatastore();
+
+    const query = datastore.createQuery('Week');
+
+    datastore.runQuery(query, (err, entities) => {
+        if (err){
+            console.log('Error getting entities: ' + err);
+            res.status(500).send();
+        }
+
+        res.json(entities[0])
+    });
+})
 
 module.exports = router;

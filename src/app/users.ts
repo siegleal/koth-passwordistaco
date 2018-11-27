@@ -14,4 +14,8 @@
         { "name": "Matt", "email": "moleary5252@gmail.com" },
         { "name": "Erin", "email": "emcoulson24@gmail.com" }
     ];
+
+    public static getName(email: string): string {
+        return this.USERS.find(x => x.email === email).name;
+    }
 } 

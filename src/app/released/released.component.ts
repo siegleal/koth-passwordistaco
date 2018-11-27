@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PickService } from '../pick.service';
+import { WeekService } from '../week.service';
 import { Pick }	from '../pick';
 import { Users } from '../users';
 
@@ -9,13 +10,16 @@ import { Users } from '../users';
   styleUrls: ['./released.component.css']
 })
 export class ReleasedComponent implements OnInit {
-	week: number = 12;
+  week: number;
 	picks: Pick[];
 
-  constructor(private pickService: PickService) { }
+  constructor(private pickService: PickService, private weekService: WeekService) { }
 
   ngOnInit() {
-  	this.pickService.getPicksForWeek(this.week).subscribe(picks => this.picks = picks);
+    this.weekService.getReleasedWeek().subscribe(week => {
+      this.week = week;
+      this.pickService.getPicksForWeek(week).subscribe(picks => this.picks = picks);
+    })
   }
   
   public getNameFromEmail(email: string): string {

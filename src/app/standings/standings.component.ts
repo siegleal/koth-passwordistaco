@@ -11,7 +11,7 @@ import { Users } from '../users';
 export class StandingsComponent implements OnInit {
   allPicks: PicksForUser[] = [];
   showAll: boolean = false;
-  thruWeek: number = 12;
+  thruWeek: number = 13;
 
 
   constructor(private pickService: PickService) { }

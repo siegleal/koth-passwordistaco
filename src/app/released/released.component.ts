@@ -9,7 +9,7 @@ import { Users } from '../users';
   styleUrls: ['./released.component.css']
 })
 export class ReleasedComponent implements OnInit {
-	week: number = 11;
+	week: number = 12;
 	picks: Pick[];
 
   constructor(private pickService: PickService) { }

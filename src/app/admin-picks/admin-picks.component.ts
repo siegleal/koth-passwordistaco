@@ -18,7 +18,7 @@ export class AdminPicksComponent implements OnInit {
 
   reload() : void {
     Users.USERS.forEach(user => {
-      this.pickService.getPicksForUser(user.email, 17).subscribe(picks => {
+      this.pickService.getPicksForUser(user.email, 18).subscribe(picks => {
         this.allPicks.push(new PicksForUser(user.name, picks));
         this.allPicks.sort((a,b) => a.name < b.name ? -1 : 1);
       });

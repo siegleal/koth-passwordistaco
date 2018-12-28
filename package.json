@@ -28,6 +28,7 @@
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
+    "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.6",
     "npm": "^6.4.1",
